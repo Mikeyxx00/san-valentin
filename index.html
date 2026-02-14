@@ -3,171 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestro Árbol 💖</title>
+<title>Nuestro Árbol ❤️</title>
 
 <style>
 :root{
-  --bg-top:#f6e7d7;
-  --bg-bottom:#e8b6b6;
-  --trunk:#5c3b2e;
-  --leaf:#c9184a;
-  --text:#4a2c2a;
-  --grow-time:3s;
+  --bg:#e7cbb5;
+  --trunk:#3b1407;
+  --heart1:#ff4d6d;
+  --heart2:#d00000;
+  --heart3:#ff758f;
 }
 
 body{
   margin:0;
   height:100vh;
+  background:var(--bg);
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  background:linear-gradient(var(--bg-top),var(--bg-bottom));
-  font-family:'Segoe UI',sans-serif;
   overflow:hidden;
-  color:var(--text);
-}
-
-.container{
-  text-align:center;
+  font-family:sans-serif;
 }
 
 svg{
-  width:450px;
+  width:700px;
   max-width:95vw;
 }
 
-/* RAMAS */
+/* Crecimiento ramas */
 .branch{
   fill:none;
   stroke:var(--trunk);
-  stroke-width:4;
+  stroke-width:5;
   stroke-linecap:round;
-  stroke-dasharray:1000;
-  stroke-dashoffset:1000;
-  animation:grow var(--grow-time) ease forwards;
+  stroke-dasharray:2000;
+  stroke-dashoffset:2000;
+  animation:grow 4s ease forwards;
 }
 
 .branch.delay1{animation-delay:1s;}
 .branch.delay2{animation-delay:2s;}
-.branch.delay3{animation-delay:2.8s;}
+.branch.delay3{animation-delay:3s;}
 
 @keyframes grow{
   to{stroke-dashoffset:0;}
 }
 
-/* HOJAS */
+/* Corazones */
 .leaf{
-  fill:var(--leaf);
   opacity:0;
-  transform:scale(0.3);
-  animation:pop 0.8s ease forwards;
+  transform:scale(0);
+  animation:pop 0.6s ease forwards;
 }
 
 @keyframes pop{
-  0%{opacity:0;transform:scale(0.3);}
-  70%{opacity:1;transform:scale(1.2);}
+  0%{opacity:0;transform:scale(0);}
+  60%{opacity:1;transform:scale(1.2);}
   100%{opacity:1;transform:scale(1);}
-}
-
-.timer{
-  margin-top:20px;
-  font-size:18px;
-  font-weight:500;
-}
-
-.timer span{
-  display:block;
-  font-weight:bold;
-  margin-top:5px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<svg viewBox="0 0 400 500" id="tree">
+<svg viewBox="0 0 800 700">
 
   <!-- Tronco -->
-  <path class="branch" d="M200 500 L200 360"/>
+  <path class="branch" d="M400 650 L400 450"/>
 
   <!-- Ramas principales -->
-  <path class="branch delay1" d="M200 380 Q140 300 110 250"/>
-  <path class="branch delay1" d="M200 380 Q260 300 290 250"/>
+  <path class="branch delay1" d="M400 500 Q250 350 150 250"/>
+  <path class="branch delay1" d="M400 500 Q550 350 650 250"/>
 
   <!-- Ramas secundarias -->
-  <path class="branch delay2" d="M150 320 Q120 260 90 220"/>
-  <path class="branch delay2" d="M250 320 Q280 260 310 220"/>
+  <path class="branch delay2" d="M300 400 Q200 300 120 200"/>
+  <path class="branch delay2" d="M500 400 Q600 300 680 200"/>
 
-  <!-- Ramas terciarias -->
-  <path class="branch delay3" d="M200 340 Q160 260 150 200"/>
-  <path class="branch delay3" d="M200 340 Q240 260 250 200"/>
+  <!-- Ramas superiores -->
+  <path class="branch delay3" d="M400 450 Q350 300 300 200"/>
+  <path class="branch delay3" d="M400 450 Q450 300 500 200"/>
 
-  <!-- Grupo de hojas -->
+  <!-- Grupo hojas -->
   <g id="leaves"></g>
 
 </svg>
 
-<div class="timer">
-Mi amor por ti comenzó hace...
-<span id="time"></span>
-</div>
-
-</div>
-
 <script>
 
-// ========= CONFIGURA TU FECHA =========
-const startDate = new Date("2025-01-01T00:00:00");
+const leavesGroup = document.getElementById("leaves");
 
-// ========= CONTADOR =========
-function updateTimer(){
-  const now=new Date();
-  const diff=now-startDate;
-
-  const s=Math.floor(diff/1000)%60;
-  const m=Math.floor(diff/1000/60)%60;
-  const h=Math.floor(diff/1000/60/60)%24;
-  const d=Math.floor(diff/1000/60/60/24);
-
-  document.getElementById("time").innerHTML=
-  `${d} días ${h} horas ${m} minutos ${s} segundos ❤️`;
-}
-setInterval(updateTimer,1000);
-updateTimer();
-
-// ========= GENERAR MUCHOS CORAZONES =========
-const leavesGroup=document.getElementById("leaves");
-
-function createHeart(x,y,delay){
-  const heart=document.createElementNS("http://www.w3.org/2000/svg","path");
+// Función crear corazón SVG
+function createHeart(x,y,size,color,delay){
+  const heart = document.createElementNS("http://www.w3.org/2000/svg","path");
   heart.setAttribute("d",`
     M ${x} ${y}
-    C ${x-5} ${y-10}, ${x-20} ${y-10}, ${x-20} ${y+5}
-    C ${x-20} ${y+20}, ${x} ${y+30}, ${x} ${y+30}
-    C ${x} ${y+30}, ${x+20} ${y+20}, ${x+20} ${y+5}
-    C ${x+20} ${y-10}, ${x+5} ${y-10}, ${x} ${y} Z
+    C ${x-size} ${y-size},
+      ${x-2*size} ${y-size},
+      ${x-2*size} ${y}
+    C ${x-2*size} ${y+size},
+      ${x} ${y+2*size},
+      ${x} ${y+2*size}
+    C ${x} ${y+2*size},
+      ${x+2*size} ${y+size},
+      ${x+2*size} ${y}
+    C ${x+2*size} ${y-size},
+      ${x+size} ${y-size},
+      ${x} ${y} Z
   `);
+  heart.setAttribute("fill",color);
   heart.classList.add("leaf");
-  heart.style.animationDelay=delay+"s";
+  heart.style.animationDelay = delay+"s";
   leavesGroup.appendChild(heart);
 }
 
-// Distribuir corazones alrededor de la copa
-let totalHearts=60;
+// Generar copa en forma de corazón
+const totalHearts = 120;
+
 for(let i=0;i<totalHearts;i++){
-  let angle=Math.random()*Math.PI;
-  let radius=80+Math.random()*50;
-  let x=200+Math.cos(angle)*radius;
-  let y=180-Math.sin(angle)*radius;
-  createHeart(x,y,3+i*0.05);
+
+  let angle = Math.random()*Math.PI;
+  let radius = 200 + Math.random()*100;
+
+  let x = 400 + Math.cos(angle)*radius;
+  let y = 250 - Math.sin(angle)*radius*0.8;
+
+  // Dar forma general de corazón grande
+  if(y < 120) y += 60;
+
+  const colors = ["#ff4d6d","#d00000","#ff758f"];
+  const randomColor = colors[Math.floor(Math.random()*colors.length)];
+
+  createHeart(x,y,6+Math.random()*4,randomColor,4+i*0.03);
 }
 
 </script>
 
 </body>
 </html>
+
+
 
 
