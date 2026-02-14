@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentín 💘</title>
+<title>Nuestra Historia 💘</title>
 
 <style>
 body {
@@ -13,89 +13,99 @@ body {
     height: 100vh;
     background: linear-gradient(135deg, #ff4e8d, #ff9ecf);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     font-family: Arial, sans-serif;
     overflow: hidden;
-}
-
-.container {
     color: white;
+    text-align: center;
 }
 
-h1 {
-    font-size: 3em;
-    margin-bottom: 40px;
-}
-
-.buttons {
-    position: relative;
-}
-
-button {
-    padding: 15px 35px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 10px;
-    transition: 0.3s;
-}
-
-#yes {
-    background-color: #00c853;
-    color: white;
-}
-
-#no {
-    background-color: #d50000;
-    color: white;
-    position: absolute;
-}
-
-.heart {
-    position: absolute;
+#tree {
     font-size: 80px;
-    animation: float 2s infinite ease-in-out;
+    animation: grow 3s ease forwards;
+}
+
+@keyframes grow {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.leaf {
+    position: absolute;
+    font-size: 30px;
+    animation: float 4s infinite ease-in-out;
 }
 
 @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-30px); }
-    100% { transform: translateY(0); }
+    0% { transform: translateY(0); opacity:1; }
+    50% { transform: translateY(-50px); opacity:0.8; }
+    100% { transform: translateY(0); opacity:1; }
+}
+
+#timer {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>FELIZ SAN VALENTÍN 💕<br>¿QUIERES SER MI 14 DE FEBRERO?</h1>
-    
-    <div class="buttons">
-        <button id="yes">SÍ 💚</button>
-        <button id="no">NO ❌</button>
-    </div>
+<div id="tree">💗</div>
+
+<div id="timer">
+Mi amor comenzó por ti hace...
+<br>
+<span id="time"></span>
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
 
-noBtn.addEventListener("mouseover", function() {
-    const x = Math.random() * window.innerWidth - 100;
-    const y = Math.random() * window.innerHeight - 50;
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
+// 🔥 CAMBIA ESTA FECHA
+const startDate = new Date("2025-06-14T22:30:00");
 
-yesBtn.addEventListener("click", function() {
-    document.body.innerHTML += "<div class='heart'>💖</div>";
-});
+function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / 1000 / 60) % 60;
+    const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+    const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+
+    document.getElementById("time").innerHTML =
+        days + " días, " +
+        hours + " horas, " +
+        minutes + " minutos, " +
+        seconds + " segundos ❤️";
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+
+// 🌳 Crear corazones hojas
+function createLeaf() {
+    const leaf = document.createElement("div");
+    leaf.classList.add("leaf");
+    leaf.innerHTML = "❤️";
+
+    leaf.style.left = Math.random() * window.innerWidth + "px";
+    leaf.style.top = Math.random() * window.innerHeight + "px";
+
+    document.body.appendChild(leaf);
+
+    setTimeout(() => {
+        leaf.remove();
+    }, 4000);
+}
+
+setInterval(createLeaf, 500);
+
 </script>
 
 </body>
 </html>
-
-
