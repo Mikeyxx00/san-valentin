@@ -26,7 +26,6 @@ body {
     font-size: 80px;
     animation: heartbeat 1s infinite;
     cursor: pointer;
-    z-index: 10;
 }
 
 @keyframes heartbeat {
@@ -37,7 +36,7 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Árbol gigante */
+/* Árbol */
 #tree {
     display: none;
     font-size: 60px;
@@ -97,14 +96,14 @@ button {
 #noBtn {
     background: #ff3333;
     color: white;
-    position: relative;
+    position: absolute;
 }
 </style>
 </head>
 
 <body>
 
-<div id="seed">💖</div>
+<div id="seed" onclick="startTree()">💖</div>
 <div id="tree">🌳</div>
 
 <div id="message"></div>
@@ -120,21 +119,11 @@ button {
 
 const startDate = new Date("2025-01-01T00:00:00");
 
-const seed = document.getElementById("seed");
-const tree = document.getElementById("tree");
-const buttons = document.querySelector(".buttons");
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-
 let yesSize = 1;
 
-/* 🔥 SOLUCIÓN DEFINITIVA */
-seed.addEventListener("click", startTree);
-seed.addEventListener("touchstart", startTree);
-
 function startTree() {
-    seed.style.display = "none";
-    tree.style.display = "block";
+    document.getElementById("seed").style.display = "none";
+    document.getElementById("tree").style.display = "block";
     startExperience();
 }
 
@@ -145,7 +134,7 @@ function startExperience() {
     setInterval(updateTimer, 1000);
 
     setTimeout(() => {
-        buttons.style.display = "block";
+        document.querySelector(".buttons").style.display = "block";
     }, 4000);
 }
 
@@ -194,27 +183,32 @@ function startLeaves() {
     }, 300);
 }
 
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+/* Botón NO huye */
+document.addEventListener("DOMContentLoaded", function() {
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
 
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.addEventListener("mouseover", function() {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
 
-    yesSize += 0.2;
-    yesBtn.style.transform = `scale(${yesSize})`;
-});
+        yesSize += 0.2;
+        yesBtn.style.transform = "scale(" + yesSize + ")";
+    });
 
-yesBtn.addEventListener("click", () => {
-    document.body.innerHTML = `
-        <h1 style="font-size:50px;">Sabía que dirías que sí 😍💖</h1>
-        <h2>Te amo infinito ❤️✨</h2>
-    `;
+    yesBtn.addEventListener("click", function() {
+        document.body.innerHTML = `
+            <h1 style="font-size:50px;">Sabía que dirías que sí 😍💖</h1>
+            <h2>Te amo infinito ❤️✨</h2>
+        `;
+    });
 });
 
 </script>
 
 </body>
 </html>
+
 
