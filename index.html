@@ -40,7 +40,7 @@ body {
 #tree {
     display: none;
     font-size: 80px;
-    margin-top: -120px;
+    margin-top: -150px; /* más arriba */
     animation: grow 4s ease forwards;
     position: relative;
 }
@@ -51,11 +51,11 @@ body {
     100% { transform: scale(3); }
 }
 
-/* Corazones centrados */
+/* Corazones centrados al árbol */
 .tree-hearts {
     position: absolute;
     top: -30px;
-    left: 50%;
+    left: 45%; /* más a la izquierda */
     transform: translateX(-50%);
     font-size: 28px;
     animation: pulse 2s infinite;
@@ -80,25 +80,28 @@ body {
     100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* Texto principal */
+/* Texto principal más abajo */
 #message {
-    margin-top: 30px;
-    font-size: 36px;
+    margin-top: 80px; /* bajado */
+    font-size: 38px;
     font-family: 'Playfair Display', serif;
-    min-height: 50px;
+    min-height: 60px;
 }
 
 /* Timer */
 #timer {
-    margin-top: 18px;
+    margin-top: 20px;
     font-size: 24px;
     font-weight: 700;
 }
 
+/* Subtexto */
 .subtext {
     font-size: 18px;
-    margin-top: 8px;
-    opacity: 0.9;
+    margin-top: 12px;
+    opacity: 0.95;
+    max-width: 700px;
+    padding: 0 20px;
 }
 
 /* Botones */
@@ -144,7 +147,14 @@ button {
 
 <div id="message"></div>
 <div id="timer"></div>
-<div class="subtext">Me comenzaste a gustar una semana y 2 días después de conocerte 💭✨</div>
+
+<div class="subtext">
+    Este regalo es para ti Maguin, una persona que amo muchísimo, que respeto y sobre todo admiro... 🤍
+</div>
+
+<div class="subtext">
+    Esta página web la diseñé especialmente para ti, es algo que no había intentado y espero te guste muchísimo, continúa abriendo tu regalito jejeje 😊❤️
+</div>
 
 <div class="buttons">
     <h2>¿Quieres ser mi San Valentín? 💝</h2>
@@ -239,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
     yesBtn.addEventListener("click", function() {
         document.body.innerHTML = `
             <h1 style="font-family:'Playfair Display',serif;font-size:60px;">
-                Sabía que dirías que sí 😍💖
+                Jejeje espero te haya gustado muchísimo 💖
             </h1>
             <h2 style="font-size:32px;">Te amo infinito ❤️✨</h2>
         `;
@@ -250,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
 
