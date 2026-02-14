@@ -1,33 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Carta de San Valentín</title>
-  <link rel="stylesheet" href="./style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia 💘</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ff4e8d, #b30059);
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Corazón inicial */
+#seed {
+    font-size: 80px;
+    animation: heartbeat 1s infinite;
+    cursor: pointer;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Árbol */
+#tree {
+    display: none;
+    font-size: 100px;
+    animation: grow 3s ease forwards;
+}
+
+@keyframes grow {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* Hojas */
+.leaf {
+    position: absolute;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-10vh) rotate(360deg); }
+}
+
+/* Texto */
+#message {
+    margin-top: 20px;
+    font-size: 26px;
+    min-height: 40px;
+}
+
+/* Temporizador */
+#timer {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
 </head>
+
 <body>
 
-   
+<div id="seed">💖</div>
 
-<div class="valentines-day">
-  <div class="envelope"></div>
-  <div class="heart"></div>
-  <div class="text"> PARA: <br> DAVID SEVERINO </div>
-  <div class="front"></div>
-</div>
+<div id="tree">🌳</div>
 
-<div id="card">
-  <div class="side one"></div>
-  <div class="side two">
-    <h2>Para mi amorcito</h2>
-    <p>Querido David... </p>
-    <p>Tienes un culito muy hermoso, podria dormir noche tras noche sobre el... </p>
-    <p>Quiero vivir contigo y tener tu culo de sombrero toda la eternidad... te ama: la wendys</p>
-  </div>
-</div>
+<div id="message"></div>
+<div id="timer"></div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="./script.js"></script>
+<script>
+
+// 🔥 CAMBIA ESTA FECHA POR LA REAL
+const startDate = new Date("2025-01-01T00:00:00");
+
+// Corazón → Árbol
+const seed = document.getElementById("seed");
+const tree = document.getElementById("tree");
+
+seed.addEventListener("click", () => {
+    seed.style.display = "none";
+    tree.style.display = "block";
+    startExperience();
+});
+
+function startExperience() {
+    typeWriter("Mi amor comenzó por ti hace...");
+    startLeaves();
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+// Máquina de escribir
+function typeWriter(text) {
+    let i = 0;
+    const message = document.getElementById("message");
+    function typing() {
+        if (i < text.length) {
+            message.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 50);
+        }
+    }
+    typing();
+}
+
+// Temporizador
+function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / 1000 / 60) % 60;
+    const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+    const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+
+    document.getElementById("timer").innerHTML =
+        days + " días, " +
+        hours + " horas, " +
+        minutes + " minutos, " +
+        seconds + " segundos ❤️";
+}
+
+// Corazones flotando
+function startLeaves() {
+    setInterval(() => {
+        const leaf = document.createElement("div");
+        leaf.classList.add("leaf");
+        leaf.innerHTML = "❤️";
+        leaf.style.left = Math.random() * window.innerWidth + "px";
+        leaf.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(leaf);
+
+        setTimeout(() => {
+            leaf.remove();
+        }, 6000);
+    }, 300);
+}
+
+</script>
 
 </body>
 </html>
