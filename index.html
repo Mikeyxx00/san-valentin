@@ -5,14 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuestra Historia 💘</title>
 
+<!-- Fuente elegante romántica -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: radial-gradient(circle at top, #ff4e8d, #b30059);
+    background: radial-gradient(circle at top, #ff4e8d, #8b004f);
     overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     color: white;
     text-align: center;
     display: flex;
@@ -29,24 +32,38 @@ body {
 }
 
 @keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2); }
+    0%,100% { transform: scale(1); }
+    25%,75% { transform: scale(1.2); }
     50% { transform: scale(1); }
-    75% { transform: scale(1.2); }
-    100% { transform: scale(1); }
 }
 
-/* Árbol */
+/* Árbol más grande y más arriba */
 #tree {
     display: none;
-    font-size: 60px;
+    font-size: 80px;
+    margin-top: -40px;
     animation: grow 4s ease forwards;
+    position: relative;
 }
 
 @keyframes grow {
     0% { transform: scale(0); }
-    50% { transform: scale(1.5); }
-    100% { transform: scale(2.5); }
+    50% { transform: scale(2); }
+    100% { transform: scale(3); }
+}
+
+/* Corazones decorativos en árbol */
+.tree-hearts {
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    font-size: 25px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 .leaf {
@@ -63,14 +80,21 @@ body {
 
 #message {
     margin-top: 20px;
-    font-size: 26px;
+    font-size: 28px;
+    font-family: 'Playfair Display', serif;
     min-height: 40px;
 }
 
 #timer {
     margin-top: 15px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
+}
+
+.subtext {
+    font-size: 16px;
+    margin-top: 5px;
+    opacity: 0.9;
 }
 
 .buttons {
@@ -82,10 +106,11 @@ button {
     padding: 12px 25px;
     font-size: 18px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     margin: 10px;
     transition: 0.3s;
+    font-family: 'Quicksand', sans-serif;
 }
 
 #yesBtn {
@@ -104,10 +129,15 @@ button {
 <body>
 
 <div id="seed" onclick="startTree()">💖</div>
-<div id="tree">🌳</div>
+
+<div id="tree">
+    🌳
+    <div class="tree-hearts">💖 💙 💜 💛 💚</div>
+</div>
 
 <div id="message"></div>
 <div id="timer"></div>
+<div class="subtext">Me comenzaste a gustar una semana y 2 días después de conocerte 💭✨</div>
 
 <div class="buttons">
     <h2>¿Quieres ser mi San Valentín? 💝</h2>
@@ -117,7 +147,8 @@ button {
 
 <script>
 
-const startDate = new Date("2025-01-01T00:00:00");
+/* Fecha aniversario */
+const startDate = new Date("2023-08-23T00:00:00");
 
 let yesSize = 1;
 
@@ -128,7 +159,7 @@ function startTree() {
 }
 
 function startExperience() {
-    typeWriter("Mi amor comenzó por ti hace...");
+    typeWriter("Mi amor por ti comenzó el 23 de agosto de 2023...");
     startLeaves();
     updateTimer();
     setInterval(updateTimer, 1000);
@@ -146,7 +177,7 @@ function typeWriter(text) {
         if (i < text.length) {
             message.innerHTML += text.charAt(i);
             i++;
-            setTimeout(typing, 50);
+            setTimeout(typing, 40);
         }
     }
     typing();
@@ -165,14 +196,15 @@ function updateTimer() {
         days + " días, " +
         hours + " horas, " +
         minutes + " minutos, " +
-        seconds + " segundos ❤️";
+        seconds + " segundos contigo ❤️";
 }
 
 function startLeaves() {
+    const colors = ["❤️","💖","💗","💓","💞","💘","💝"];
     setInterval(() => {
         const leaf = document.createElement("div");
         leaf.classList.add("leaf");
-        leaf.innerHTML = "❤️";
+        leaf.innerHTML = colors[Math.floor(Math.random() * colors.length)];
         leaf.style.left = Math.random() * window.innerWidth + "px";
         leaf.style.animationDuration = (Math.random() * 3 + 3) + "s";
         document.body.appendChild(leaf);
@@ -183,7 +215,6 @@ function startLeaves() {
     }, 300);
 }
 
-/* Botón NO huye */
 document.addEventListener("DOMContentLoaded", function() {
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
@@ -194,13 +225,15 @@ document.addEventListener("DOMContentLoaded", function() {
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
 
-        yesSize += 0.2;
+        yesSize += 0.25;
         yesBtn.style.transform = "scale(" + yesSize + ")";
     });
 
     yesBtn.addEventListener("click", function() {
         document.body.innerHTML = `
-            <h1 style="font-size:50px;">Sabía que dirías que sí 😍💖</h1>
+            <h1 style="font-family:'Playfair Display',serif;font-size:55px;">
+                Sabía que dirías que sí 😍💖
+            </h1>
             <h2>Te amo infinito ❤️✨</h2>
         `;
     });
@@ -210,5 +243,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
