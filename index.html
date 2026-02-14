@@ -6,23 +6,15 @@
 <title>Nuestro Árbol 💖</title>
 
 <style>
-
-/* =========================
-   VARIABLES GLOBALES
-========================= */
 :root{
-  --bg-top: #f6e7d7;
-  --bg-bottom: #e8b6b6;
-  --trunk-color: #6b3e26;
-  --leaf-color: #c9184a;
-  --text-color: #4a2c2a;
-  --grow-duration: 3s;
-  --leaf-delay: 3.5s;
+  --bg-top:#f6e7d7;
+  --bg-bottom:#e8b6b6;
+  --trunk:#5c3b2e;
+  --leaf:#c9184a;
+  --text:#4a2c2a;
+  --grow-time:3s;
 }
 
-/* =========================
-   LAYOUT
-========================= */
 body{
   margin:0;
   height:100vh;
@@ -30,78 +22,54 @@ body{
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  background:linear-gradient(var(--bg-top), var(--bg-bottom));
+  background:linear-gradient(var(--bg-top),var(--bg-bottom));
   font-family:'Segoe UI',sans-serif;
   overflow:hidden;
-  color:var(--text-color);
+  color:var(--text);
 }
 
 .container{
   text-align:center;
 }
 
-/* =========================
-   SVG TREE
-========================= */
 svg{
-  width:420px;
-  max-width:90vw;
+  width:450px;
+  max-width:95vw;
 }
 
-/* Crecimiento de ramas */
+/* RAMAS */
 .branch{
   fill:none;
-  stroke:var(--trunk-color);
+  stroke:var(--trunk);
   stroke-width:4;
   stroke-linecap:round;
   stroke-dasharray:1000;
   stroke-dashoffset:1000;
-  animation:growBranch var(--grow-duration) ease forwards;
+  animation:grow var(--grow-time) ease forwards;
 }
 
-.branch.delay-1 { animation-delay:1s; }
-.branch.delay-2 { animation-delay:2s; }
+.branch.delay1{animation-delay:1s;}
+.branch.delay2{animation-delay:2s;}
+.branch.delay3{animation-delay:2.8s;}
 
-/* Corazones */
+@keyframes grow{
+  to{stroke-dashoffset:0;}
+}
+
+/* HOJAS */
 .leaf{
-  fill:var(--leaf-color);
+  fill:var(--leaf);
   opacity:0;
-  transform:scale(0.5);
-  animation:leafAppear 1s ease forwards;
+  transform:scale(0.3);
+  animation:pop 0.8s ease forwards;
 }
 
-.leaf.delay-3 { animation-delay: var(--leaf-delay); }
-.leaf.delay-4 { animation-delay: calc(var(--leaf-delay) + 0.5s); }
-.leaf.delay-5 { animation-delay: calc(var(--leaf-delay) + 1s); }
-.leaf.delay-6 { animation-delay: calc(var(--leaf-delay) + 1.5s); }
-
-/* =========================
-   ANIMACIONES
-========================= */
-@keyframes growBranch{
-  to{
-    stroke-dashoffset:0;
-  }
+@keyframes pop{
+  0%{opacity:0;transform:scale(0.3);}
+  70%{opacity:1;transform:scale(1.2);}
+  100%{opacity:1;transform:scale(1);}
 }
 
-@keyframes leafAppear{
-  0%{
-    opacity:0;
-    transform:scale(0.3);
-  }
-  60%{
-    opacity:1;
-    transform:scale(1.2);
-  }
-  100%{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-/* =========================
-   CONTADOR
-========================= */
 .timer{
   margin-top:20px;
   font-size:18px;
@@ -109,11 +77,10 @@ svg{
 }
 
 .timer span{
-  font-weight:bold;
   display:block;
+  font-weight:bold;
   margin-top:5px;
 }
-
 </style>
 </head>
 
@@ -121,77 +88,86 @@ svg{
 
 <div class="container">
 
-<svg viewBox="0 0 400 500">
+<svg viewBox="0 0 400 500" id="tree">
 
   <!-- Tronco -->
-  <path class="branch" d="M200 500 L200 350" />
+  <path class="branch" d="M200 500 L200 360"/>
 
   <!-- Ramas principales -->
-  <path class="branch delay-1" d="M200 380 Q150 300 120 250" />
-  <path class="branch delay-1" d="M200 380 Q250 300 280 250" />
+  <path class="branch delay1" d="M200 380 Q140 300 110 250"/>
+  <path class="branch delay1" d="M200 380 Q260 300 290 250"/>
 
   <!-- Ramas secundarias -->
-  <path class="branch delay-2" d="M200 350 Q160 280 150 220" />
-  <path class="branch delay-2" d="M200 350 Q240 280 250 220" />
+  <path class="branch delay2" d="M150 320 Q120 260 90 220"/>
+  <path class="branch delay2" d="M250 320 Q280 260 310 220"/>
 
-  <!-- Corazones -->
-  <path class="leaf delay-3" d="M120 240 
-  C110 220, 80 220, 80 250 
-  C80 280, 120 300, 120 300 
-  C120 300, 160 280, 160 250 
-  C160 220,130 220,120 240 Z"/>
+  <!-- Ramas terciarias -->
+  <path class="branch delay3" d="M200 340 Q160 260 150 200"/>
+  <path class="branch delay3" d="M200 340 Q240 260 250 200"/>
 
-  <path class="leaf delay-4" d="M280 240 
-  C270 220, 240 220, 240 250 
-  C240 280, 280 300, 280 300 
-  C280 300, 320 280, 320 250 
-  C320 220,290 220,280 240 Z"/>
-
-  <path class="leaf delay-5" d="M150 210 
-  C140 190, 110 190, 110 220 
-  C110 250, 150 270, 150 270 
-  C150 270, 190 250, 190 220 
-  C190 190,160 190,150 210 Z"/>
-
-  <path class="leaf delay-6" d="M250 210 
-  C240 190, 210 190, 210 220 
-  C210 250, 250 270, 250 270 
-  C250 270, 290 250, 290 220 
-  C290 190,260 190,250 210 Z"/>
+  <!-- Grupo de hojas -->
+  <g id="leaves"></g>
 
 </svg>
 
 <div class="timer">
-  Mi amor por ti comenzó hace...
-  <span id="time"></span>
+Mi amor por ti comenzó hace...
+<span id="time"></span>
 </div>
 
 </div>
 
 <script>
 
-/* =========================
-   CONFIGURA TU FECHA AQUÍ
-========================= */
+// ========= CONFIGURA TU FECHA =========
 const startDate = new Date("2025-01-01T00:00:00");
 
+// ========= CONTADOR =========
 function updateTimer(){
-  const now = new Date();
-  const diff = now - startDate;
+  const now=new Date();
+  const diff=now-startDate;
 
-  const seconds = Math.floor(diff/1000)%60;
-  const minutes = Math.floor(diff/1000/60)%60;
-  const hours = Math.floor(diff/1000/60/60)%24;
-  const days = Math.floor(diff/1000/60/60/24);
+  const s=Math.floor(diff/1000)%60;
+  const m=Math.floor(diff/1000/60)%60;
+  const h=Math.floor(diff/1000/60/60)%24;
+  const d=Math.floor(diff/1000/60/60/24);
 
-  document.getElementById("time").innerHTML =
-    `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos ❤️`;
+  document.getElementById("time").innerHTML=
+  `${d} días ${h} horas ${m} minutos ${s} segundos ❤️`;
 }
-
 setInterval(updateTimer,1000);
 updateTimer();
+
+// ========= GENERAR MUCHOS CORAZONES =========
+const leavesGroup=document.getElementById("leaves");
+
+function createHeart(x,y,delay){
+  const heart=document.createElementNS("http://www.w3.org/2000/svg","path");
+  heart.setAttribute("d",`
+    M ${x} ${y}
+    C ${x-5} ${y-10}, ${x-20} ${y-10}, ${x-20} ${y+5}
+    C ${x-20} ${y+20}, ${x} ${y+30}, ${x} ${y+30}
+    C ${x} ${y+30}, ${x+20} ${y+20}, ${x+20} ${y+5}
+    C ${x+20} ${y-10}, ${x+5} ${y-10}, ${x} ${y} Z
+  `);
+  heart.classList.add("leaf");
+  heart.style.animationDelay=delay+"s";
+  leavesGroup.appendChild(heart);
+}
+
+// Distribuir corazones alrededor de la copa
+let totalHearts=60;
+for(let i=0;i<totalHearts;i++){
+  let angle=Math.random()*Math.PI;
+  let radius=80+Math.random()*50;
+  let x=200+Math.cos(angle)*radius;
+  let y=180-Math.sin(angle)*radius;
+  createHeart(x,y,3+i*0.05);
+}
 
 </script>
 
 </body>
 </html>
+
+
