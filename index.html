@@ -26,6 +26,7 @@ body {
     font-size: 80px;
     animation: heartbeat 1s infinite;
     cursor: pointer;
+    z-index: 10;
 }
 
 @keyframes heartbeat {
@@ -49,7 +50,6 @@ body {
     100% { transform: scale(2.5); }
 }
 
-/* Hojas */
 .leaf {
     position: absolute;
     font-size: 24px;
@@ -128,11 +128,15 @@ const noBtn = document.getElementById("noBtn");
 
 let yesSize = 1;
 
-seed.addEventListener("click", () => {
+/* 🔥 SOLUCIÓN DEFINITIVA */
+seed.addEventListener("click", startTree);
+seed.addEventListener("touchstart", startTree);
+
+function startTree() {
     seed.style.display = "none";
     tree.style.display = "block";
     startExperience();
-});
+}
 
 function startExperience() {
     typeWriter("Mi amor comenzó por ti hace...");
@@ -203,6 +207,14 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 yesBtn.addEventListener("click", () => {
-
+    document.body.innerHTML = `
+        <h1 style="font-size:50px;">Sabía que dirías que sí 😍💖</h1>
+        <h2>Te amo infinito ❤️✨</h2>
+    `;
+});
 
 </script>
+
+</body>
+</html>
+
