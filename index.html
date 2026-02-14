@@ -5,261 +5,269 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuestra Historia 💘</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #ff4e8d, #8b004f);
-    overflow: hidden;
-    font-family: 'Quicksand', sans-serif;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+body{
+margin:0;
+padding:0;
+background:radial-gradient(circle at top,#ff4e8d,#8b004f);
+font-family:'Quicksand',sans-serif;
+color:white;
+text-align:center;
+overflow-x:hidden;
 }
 
-/* Corazón inicial */
-#seed {
-    font-size: 90px;
-    animation: heartbeat 1s infinite;
-    cursor: pointer;
+.container{
+padding-top:120px;
 }
 
-@keyframes heartbeat {
-    0%,100% { transform: scale(1); }
-    25%,75% { transform: scale(1.2); }
-    50% { transform: scale(1); }
+/* corazón inicial */
+#seed{
+font-size:90px;
+cursor:pointer;
+animation:heartbeat 1s infinite;
 }
 
-/* Árbol */
-#tree {
-    display: none;
-    font-size: 80px;
-    margin-top: -150px; /* más arriba */
-    animation: grow 4s ease forwards;
-    position: relative;
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.2);}
 }
 
-@keyframes grow {
-    0% { transform: scale(0); }
-    50% { transform: scale(2); }
-    100% { transform: scale(3); }
+/* árbol */
+#tree{
+display:none;
+font-size:80px;
+margin-top:-120px;
+animation:grow 3s ease forwards;
+position:relative;
 }
 
-/* Corazones centrados al árbol */
-.tree-hearts {
-    position: absolute;
-    top: -30px;
-    left: 45%; /* más a la izquierda */
-    transform: translateX(-50%);
-    font-size: 28px;
-    animation: pulse 2s infinite;
-    text-align: center;
-    width: 100%;
+@keyframes grow{
+0%{transform:scale(0);}
+100%{transform:scale(3);}
 }
 
-@keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+.tree-hearts{
+position:absolute;
+top:-40px;
+left:50%;
+transform:translateX(-50%);
+font-size:28px;
 }
 
-.leaf {
-    position: absolute;
-    font-size: 24px;
-    animation: float 6s linear infinite;
-    opacity: 0.8;
+/* texto */
+#message{
+margin-top:100px;
+font-size:38px;
+font-family:'Playfair Display',serif;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-10vh) rotate(360deg); }
+#timer{
+margin-top:20px;
+font-size:24px;
+font-weight:600;
 }
 
-/* Texto principal más abajo */
-#message {
-    margin-top: 80px; /* bajado */
-    font-size: 38px;
-    font-family: 'Playfair Display', serif;
-    min-height: 60px;
+.subtext{
+margin-top:25px;
+font-size:18px;
+max-width:800px;
+margin-left:auto;
+margin-right:auto;
+padding:0 20px;
 }
 
-/* Timer */
-#timer {
-    margin-top: 20px;
-    font-size: 24px;
-    font-weight: 700;
+/* botones */
+.buttons{
+margin-top:60px;
+display:none;
 }
 
-/* Subtexto */
-.subtext {
-    font-size: 18px;
-    margin-top: 12px;
-    opacity: 0.95;
-    max-width: 700px;
-    padding: 0 20px;
+button{
+padding:14px 28px;
+font-size:20px;
+border:none;
+border-radius:14px;
+margin:10px;
+cursor:pointer;
 }
 
-/* Botones */
-.buttons {
-    margin-top: 40px;
-    display: none;
-    text-align: center;
-    position: relative;
+#yesBtn{background:#00cc66;color:white;}
+#noBtn{background:#ff3333;color:white;position:relative;}
+
+/* galería */
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+padding:60px 10%;
 }
 
-button {
-    padding: 14px 30px;
-    font-size: 20px;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    margin: 12px;
-    transition: 0.3s;
-    font-family: 'Quicksand', sans-serif;
+.card{
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:20px;
 }
 
-#yesBtn {
-    background: #00cc66;
-    color: white;
+.card img{
+width:100%;
+border-radius:15px;
 }
 
-#noBtn {
-    background: #ff3333;
-    color: white;
-    position: relative;
+.card h2{
+font-family:'Playfair Display',serif;
+margin-bottom:15px;
+}
+
+.card p{
+font-size:16px;
+line-height:1.6;
+}
+
+@media(max-width:768px){
+.gallery{
+grid-template-columns:1fr;
+padding:40px 5%;
+}
+#message{font-size:28px;}
 }
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <div id="seed" onclick="startTree()">💖</div>
 
 <div id="tree">
-    🌳
-    <div class="tree-hearts">💖 💙 💜 💛 💚</div>
+🌳
+<div class="tree-hearts">💖 💙 💜 💛 💚</div>
 </div>
 
 <div id="message"></div>
 <div id="timer"></div>
 
-<div class="subtext">
-    Este regalo es para ti Maguin, una persona que amo muchísimo, que respeto y sobre todo admiro... 🤍
+<div id="text1" class="subtext">
+Este regalo es para ti Maguin, una persona que amo muchísimo, que respeto y sobre todo admiro... 🤍
 </div>
 
-<div class="subtext">
-    Esta página web la diseñé especialmente para ti, es algo que no había intentado y espero te guste muchísimo, continúa abriendo tu regalito jejeje 😊❤️
+<div id="text2" class="subtext">
+Esta página web la diseñé especialmente para ti, es algo que no había intentado y espero te guste muchísimo, continúa abriendo tu regalito jejeje 😊❤️
 </div>
 
 <div class="buttons">
-    <h2>¿Quieres ser mi San Valentín? 💝</h2>
-    <button id="yesBtn">Sí 💖</button>
-    <button id="noBtn">No 😢</button>
+<h2>¿Quieres ser mi San Valentín? 💝</h2>
+<button id="yesBtn">Sí 💖</button>
+<button id="noBtn">No 😢</button>
+</div>
+
 </div>
 
 <script>
 
-const startDate = new Date("2023-08-23T00:00:00");
-let yesSize = 1;
+const startDate=new Date("2023-08-23T00:00:00");
+let yesSize=1;
 
-function startTree() {
-    document.getElementById("seed").style.display = "none";
-    document.getElementById("tree").style.display = "block";
-    startExperience();
+function startTree(){
+document.getElementById("seed").style.display="none";
+document.getElementById("tree").style.display="block";
+startExperience();
 }
 
-function startExperience() {
-    typeWriter("Mi amor por ti comenzó el 23 de agosto de 2023...");
-    startLeaves();
-    updateTimer();
-    setInterval(updateTimer, 1000);
+function startExperience(){
+typeWriter("Mi amor por ti comenzó el 23 de agosto de 2023...");
+updateTimer();
+setInterval(updateTimer,1000);
 
-    setTimeout(() => {
-        document.querySelector(".buttons").style.display = "block";
-    }, 4000);
+setTimeout(()=>{
+document.querySelector(".buttons").style.display="block";
+document.getElementById("text2").style.display="none";
+},5000);
 }
 
-function typeWriter(text) {
-    let i = 0;
-    const message = document.getElementById("message");
-    message.innerHTML = "";
-    function typing() {
-        if (i < text.length) {
-            message.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, 40);
-        }
-    }
-    typing();
+function typeWriter(text){
+let i=0;
+let msg=document.getElementById("message");
+function typing(){
+if(i<text.length){
+msg.innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,40);
+}
+}
+typing();
 }
 
-function updateTimer() {
-    const now = new Date();
-    const diff = now - startDate;
+function updateTimer(){
+const now=new Date();
+const diff=now-startDate;
+const days=Math.floor(diff/1000/60/60/24);
+const hours=Math.floor(diff/1000/60/60)%24;
+const minutes=Math.floor(diff/1000/60)%60;
+const seconds=Math.floor(diff/1000)%60;
 
-    const seconds = Math.floor(diff / 1000) % 60;
-    const minutes = Math.floor(diff / 1000 / 60) % 60;
-    const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
-    const days = Math.floor(diff / 1000 / 60 / 60 / 24);
-
-    document.getElementById("timer").innerHTML =
-        days + " días, " +
-        hours + " horas, " +
-        minutes + " minutos, " +
-        seconds + " segundos contigo ❤️";
+document.getElementById("timer").innerHTML=
+days+" días, "+hours+" horas, "+minutes+" minutos, "+seconds+" segundos contigo ❤️";
 }
 
-function startLeaves() {
-    const colors = ["❤️","💖","💗","💓","💞","💘","💝"];
-    setInterval(() => {
-        const leaf = document.createElement("div");
-        leaf.classList.add("leaf");
-        leaf.innerHTML = colors[Math.floor(Math.random() * colors.length)];
-        leaf.style.left = Math.random() * window.innerWidth + "px";
-        leaf.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(leaf);
+document.addEventListener("DOMContentLoaded",function(){
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
 
-        setTimeout(() => {
-            leaf.remove();
-        }, 6000);
-    }, 300);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-
-    noBtn.addEventListener("mouseover", function() {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
-
-        noBtn.style.position = "fixed";
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-
-        yesSize += 0.25;
-        yesBtn.style.transform = "scale(" + yesSize + ")";
-    });
-
-    yesBtn.addEventListener("click", function() {
-        document.body.innerHTML = `
-            <h1 style="font-family:'Playfair Display',serif;font-size:60px;">
-                Jejeje espero te haya gustado muchísimo 💖
-            </h1>
-            <h2 style="font-size:32px;">Te amo infinito ❤️✨</h2>
-        `;
-    });
+noBtn.addEventListener("mouseover",function(){
+const x=Math.random()*(window.innerWidth-100);
+const y=Math.random()*(window.innerHeight-50);
+noBtn.style.position="fixed";
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+yesSize+=0.2;
+yesBtn.style.transform="scale("+yesSize+")";
 });
 
+yesBtn.addEventListener("click",function(){
+document.body.innerHTML=`
+
+<h1 style="margin-top:80px;font-family:'Playfair Display',serif;font-size:50px;">
+Jejeje espero te haya gustado muchísimo 💖
+</h1>
+
+<div class="gallery">
+
+<div class="card">
+<h2>Roblox 🎮❤️</h2>
+<img src="1.png">
+<p>estos son algunas de tantas capturas que logre tomar mientras jugabamos roblox, que por cierto se que tendremos muchas mas! y sobre todo de terror, porque la verdad me encanta jugar mucho con vos aparte me llevo tremendos sustos JAJAJ, eres mas valiente que yo y siempre sigo tus instintos que siempre son acertados.</p>
+</div>
+
+<div class="card">
+<h2>Roblox 🎮❤️</h2>
+<img src="2.png">
+<p>esta imagen es la original sin editar, espero te guste 👧👦</p>
+</div>
+
+<div class="card">
+<h2>Nosotros bailando en Parkour roblox</h2>
+<img src="3.png">
+<p>esta actividad que elegiste me encanto mucho sobre todo porque nos estuvimos riendo bien duro JAJAJ y la pasamos super chevere con los bailes!, nos veiamos bien divas los 2, amo, y mucha risa porque casi siempre te jalaba de la cuerda cuando nos caiamos, PD: Hay que intentarlo de nuevo jejej.</p>
+</div>
+
+<div class="card">
+<h2>Nosotros 💕</h2>
+<img src="4.png">
+<p>esta foto ya no es sorpresa sin querer te arruine la sorpresa hace unos dias pero bueno, no me aguantaba en darte este regalo, quiero que sepas que te quiero muchisimo, lo sabes muy bien de mi parte, se que aveces soy terco, que no escucho aveces o que quizas me pongo muy irritable pero quiero que sepas que siempre siempre te tratare como una reina, como una persona que merece ser respetada, mi corazon es todo tuyo y espero pases un hermoso 14 de febrero 😘</p>
+</div>
+
+</div>
+`;
+});
+});
 </script>
 
 </body>
 </html>
+
 
 
 
