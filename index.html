@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia 💘</title>
+
 <style>
 body {
     margin: 0;
@@ -55,21 +62,18 @@ body {
     100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* Texto */
 #message {
     margin-top: 20px;
     font-size: 26px;
     min-height: 40px;
 }
 
-/* Temporizador */
 #timer {
     margin-top: 15px;
     font-size: 20px;
     font-weight: bold;
 }
 
-/* Botones */
 .buttons {
     margin-top: 30px;
     display: none;
@@ -96,6 +100,15 @@ button {
     position: relative;
 }
 </style>
+</head>
+
+<body>
+
+<div id="seed">💖</div>
+<div id="tree">🌳</div>
+
+<div id="message"></div>
+<div id="timer"></div>
 
 <div class="buttons">
     <h2>¿Quieres ser mi San Valentín? 💝</h2>
@@ -135,6 +148,7 @@ function startExperience() {
 function typeWriter(text) {
     let i = 0;
     const message = document.getElementById("message");
+    message.innerHTML = "";
     function typing() {
         if (i < text.length) {
             message.innerHTML += text.charAt(i);
@@ -176,7 +190,6 @@ function startLeaves() {
     }, 300);
 }
 
-/* BOTÓN NO HUYE */
 noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * (window.innerWidth - 100);
     const y = Math.random() * (window.innerHeight - 50);
@@ -189,12 +202,7 @@ noBtn.addEventListener("mouseover", () => {
     yesBtn.style.transform = `scale(${yesSize})`;
 });
 
-/* BOTÓN SÍ */
 yesBtn.addEventListener("click", () => {
-    document.body.innerHTML = `
-        <h1 style="font-size:50px;">Sabía que dirías que sí 😍💖</h1>
-        <h2>Te amo infinito ❤️✨</h2>
-    `;
-});
+
 
 </script>
