@@ -1,4 +1,4 @@
-index.html
+html
 
 <!DOCTYPE html>
 <html lang="es">
@@ -98,3 +98,4 @@ yesBtn.addEventListener("click", function() {
 
 </body>
 </html>
+
