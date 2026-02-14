@@ -3,157 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestra Historia 💘</title>
+<title>Nuestro Árbol 💖</title>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #ff4e8d, #b30059);
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+/* =========================
+   VARIABLES GLOBALES
+========================= */
+:root{
+  --bg-top: #f6e7d7;
+  --bg-bottom: #e8b6b6;
+  --trunk-color: #6b3e26;
+  --leaf-color: #c9184a;
+  --text-color: #4a2c2a;
+  --grow-duration: 3s;
+  --leaf-delay: 3.5s;
 }
 
-/* Corazón inicial */
-#seed {
-    font-size: 80px;
-    animation: heartbeat 1s infinite;
-    cursor: pointer;
+/* =========================
+   LAYOUT
+========================= */
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:linear-gradient(var(--bg-top), var(--bg-bottom));
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+  color:var(--text-color);
 }
 
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.container{
+  text-align:center;
 }
 
-/* Árbol */
-#tree {
-    display: none;
-    font-size: 100px;
-    animation: grow 3s ease forwards;
+/* =========================
+   SVG TREE
+========================= */
+svg{
+  width:420px;
+  max-width:90vw;
 }
 
-@keyframes grow {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
+/* Crecimiento de ramas */
+.branch{
+  fill:none;
+  stroke:var(--trunk-color);
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  animation:growBranch var(--grow-duration) ease forwards;
 }
 
-/* Hojas */
-.leaf {
-    position: absolute;
-    font-size: 24px;
-    animation: float 6s linear infinite;
-    opacity: 0.8;
+.branch.delay-1 { animation-delay:1s; }
+.branch.delay-2 { animation-delay:2s; }
+
+/* Corazones */
+.leaf{
+  fill:var(--leaf-color);
+  opacity:0;
+  transform:scale(0.5);
+  animation:leafAppear 1s ease forwards;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-10vh) rotate(360deg); }
+.leaf.delay-3 { animation-delay: var(--leaf-delay); }
+.leaf.delay-4 { animation-delay: calc(var(--leaf-delay) + 0.5s); }
+.leaf.delay-5 { animation-delay: calc(var(--leaf-delay) + 1s); }
+.leaf.delay-6 { animation-delay: calc(var(--leaf-delay) + 1.5s); }
+
+/* =========================
+   ANIMACIONES
+========================= */
+@keyframes growBranch{
+  to{
+    stroke-dashoffset:0;
+  }
 }
 
-/* Texto */
-#message {
-    margin-top: 20px;
-    font-size: 26px;
-    min-height: 40px;
+@keyframes leafAppear{
+  0%{
+    opacity:0;
+    transform:scale(0.3);
+  }
+  60%{
+    opacity:1;
+    transform:scale(1.2);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
 }
 
-/* Temporizador */
-#timer {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: bold;
+/* =========================
+   CONTADOR
+========================= */
+.timer{
+  margin-top:20px;
+  font-size:18px;
+  font-weight:500;
 }
+
+.timer span{
+  font-weight:bold;
+  display:block;
+  margin-top:5px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="seed">💖</div>
+<div class="container">
 
-<div id="tree">🌳</div>
+<svg viewBox="0 0 400 500">
 
-<div id="message"></div>
-<div id="timer"></div>
+  <!-- Tronco -->
+  <path class="branch" d="M200 500 L200 350" />
+
+  <!-- Ramas principales -->
+  <path class="branch delay-1" d="M200 380 Q150 300 120 250" />
+  <path class="branch delay-1" d="M200 380 Q250 300 280 250" />
+
+  <!-- Ramas secundarias -->
+  <path class="branch delay-2" d="M200 350 Q160 280 150 220" />
+  <path class="branch delay-2" d="M200 350 Q240 280 250 220" />
+
+  <!-- Corazones -->
+  <path class="leaf delay-3" d="M120 240 
+  C110 220, 80 220, 80 250 
+  C80 280, 120 300, 120 300 
+  C120 300, 160 280, 160 250 
+  C160 220,130 220,120 240 Z"/>
+
+  <path class="leaf delay-4" d="M280 240 
+  C270 220, 240 220, 240 250 
+  C240 280, 280 300, 280 300 
+  C280 300, 320 280, 320 250 
+  C320 220,290 220,280 240 Z"/>
+
+  <path class="leaf delay-5" d="M150 210 
+  C140 190, 110 190, 110 220 
+  C110 250, 150 270, 150 270 
+  C150 270, 190 250, 190 220 
+  C190 190,160 190,150 210 Z"/>
+
+  <path class="leaf delay-6" d="M250 210 
+  C240 190, 210 190, 210 220 
+  C210 250, 250 270, 250 270 
+  C250 270, 290 250, 290 220 
+  C290 190,260 190,250 210 Z"/>
+
+</svg>
+
+<div class="timer">
+  Mi amor por ti comenzó hace...
+  <span id="time"></span>
+</div>
+
+</div>
 
 <script>
 
-// 🔥 CAMBIA ESTA FECHA POR LA REAL
+/* =========================
+   CONFIGURA TU FECHA AQUÍ
+========================= */
 const startDate = new Date("2025-01-01T00:00:00");
 
-// Corazón → Árbol
-const seed = document.getElementById("seed");
-const tree = document.getElementById("tree");
+function updateTimer(){
+  const now = new Date();
+  const diff = now - startDate;
 
-seed.addEventListener("click", () => {
-    seed.style.display = "none";
-    tree.style.display = "block";
-    startExperience();
-});
+  const seconds = Math.floor(diff/1000)%60;
+  const minutes = Math.floor(diff/1000/60)%60;
+  const hours = Math.floor(diff/1000/60/60)%24;
+  const days = Math.floor(diff/1000/60/60/24);
 
-function startExperience() {
-    typeWriter("Mi amor comenzó por ti hace...");
-    startLeaves();
-    updateTimer();
-    setInterval(updateTimer, 1000);
+  document.getElementById("time").innerHTML =
+    `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos ❤️`;
 }
 
-// Máquina de escribir
-function typeWriter(text) {
-    let i = 0;
-    const message = document.getElementById("message");
-    function typing() {
-        if (i < text.length) {
-            message.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, 50);
-        }
-    }
-    typing();
-}
-
-// Temporizador
-function updateTimer() {
-    const now = new Date();
-    const diff = now - startDate;
-
-    const seconds = Math.floor(diff / 1000) % 60;
-    const minutes = Math.floor(diff / 1000 / 60) % 60;
-    const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
-    const days = Math.floor(diff / 1000 / 60 / 60 / 24);
-
-    document.getElementById("timer").innerHTML =
-        days + " días, " +
-        hours + " horas, " +
-        minutes + " minutos, " +
-        seconds + " segundos ❤️";
-}
-
-// Corazones flotando
-function startLeaves() {
-    setInterval(() => {
-        const leaf = document.createElement("div");
-        leaf.classList.add("leaf");
-        leaf.innerHTML = "❤️";
-        leaf.style.left = Math.random() * window.innerWidth + "px";
-        leaf.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(leaf);
-
-        setTimeout(() => {
-            leaf.remove();
-        }, 6000);
-    }, 300);
-}
+setInterval(updateTimer,1000);
+updateTimer();
 
 </script>
 
