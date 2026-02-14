@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuestra Historia 💘</title>
 
-<!-- Fuente elegante romántica -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -26,7 +25,7 @@ body {
 
 /* Corazón inicial */
 #seed {
-    font-size: 80px;
+    font-size: 90px;
     animation: heartbeat 1s infinite;
     cursor: pointer;
 }
@@ -37,11 +36,11 @@ body {
     50% { transform: scale(1); }
 }
 
-/* Árbol más grande y más arriba */
+/* Árbol */
 #tree {
     display: none;
     font-size: 80px;
-    margin-top: -40px;
+    margin-top: -120px;
     animation: grow 4s ease forwards;
     position: relative;
 }
@@ -52,13 +51,16 @@ body {
     100% { transform: scale(3); }
 }
 
-/* Corazones decorativos en árbol */
+/* Corazones centrados */
 .tree-hearts {
     position: absolute;
-    top: -20px;
-    left: -30px;
-    font-size: 25px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
     animation: pulse 2s infinite;
+    text-align: center;
+    width: 100%;
 }
 
 @keyframes pulse {
@@ -78,37 +80,42 @@ body {
     100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
+/* Texto principal */
 #message {
-    margin-top: 20px;
-    font-size: 28px;
+    margin-top: 30px;
+    font-size: 36px;
     font-family: 'Playfair Display', serif;
-    min-height: 40px;
+    min-height: 50px;
 }
 
+/* Timer */
 #timer {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: 600;
+    margin-top: 18px;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .subtext {
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 18px;
+    margin-top: 8px;
     opacity: 0.9;
 }
 
+/* Botones */
 .buttons {
-    margin-top: 30px;
+    margin-top: 40px;
     display: none;
+    text-align: center;
+    position: relative;
 }
 
 button {
-    padding: 12px 25px;
-    font-size: 18px;
+    padding: 14px 30px;
+    font-size: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
-    margin: 10px;
+    margin: 12px;
     transition: 0.3s;
     font-family: 'Quicksand', sans-serif;
 }
@@ -121,7 +128,7 @@ button {
 #noBtn {
     background: #ff3333;
     color: white;
-    position: absolute;
+    position: relative;
 }
 </style>
 </head>
@@ -147,9 +154,7 @@ button {
 
 <script>
 
-/* Fecha aniversario */
 const startDate = new Date("2023-08-23T00:00:00");
-
 let yesSize = 1;
 
 function startTree() {
@@ -222,6 +227,8 @@ document.addEventListener("DOMContentLoaded", function() {
     noBtn.addEventListener("mouseover", function() {
         const x = Math.random() * (window.innerWidth - 100);
         const y = Math.random() * (window.innerHeight - 50);
+
+        noBtn.style.position = "fixed";
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
 
@@ -231,10 +238,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     yesBtn.addEventListener("click", function() {
         document.body.innerHTML = `
-            <h1 style="font-family:'Playfair Display',serif;font-size:55px;">
+            <h1 style="font-family:'Playfair Display',serif;font-size:60px;">
                 Sabía que dirías que sí 😍💖
             </h1>
-            <h2>Te amo infinito ❤️✨</h2>
+            <h2 style="font-size:32px;">Te amo infinito ❤️✨</h2>
         `;
     });
 });
@@ -243,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
 
