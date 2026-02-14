@@ -1,0 +1,100 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín 💘</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4e8d, #ff9ecf);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    color: white;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    position: relative;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yes {
+    background-color: #00c853;
+    color: white;
+}
+
+#no {
+    background-color: #d50000;
+    color: white;
+    position: absolute;
+}
+
+.heart {
+    position: absolute;
+    font-size: 80px;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>FELIZ SAN VALENTÍN 💕<br>¿QUIERES SER MI 14 DE FEBRERO?</h1>
+    
+    <div class="buttons">
+        <button id="yes">SÍ 💚</button>
+        <button id="no">NO ❌</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * window.innerWidth - 100;
+    const y = Math.random() * window.innerHeight - 50;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+yesBtn.addEventListener("click", function() {
+    document.body.innerHTML += "<div class='heart'>💖</div>";
+});
+</script>
+
+</body>
+</html>
