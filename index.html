@@ -11,15 +11,25 @@
 body{
 margin:0;
 padding:0;
-background:radial-gradient(circle at top,#ff4e8d,#8b004f);
+min-height:100vh;
+background:linear-gradient(to bottom,#ff4e8d,#8b004f);
+background-repeat:no-repeat;
+background-size:cover;
+background-attachment:fixed;
 font-family:'Quicksand',sans-serif;
 color:white;
 text-align:center;
 overflow-x:hidden;
 }
 
+/* CONTENEDOR */
 .container{
-padding-top:120px;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding-top:180px; /* TODO más abajo */
+padding-bottom:80px;
 }
 
 /* corazón inicial */
@@ -38,8 +48,8 @@ animation:heartbeat 1s infinite;
 #tree{
 display:none;
 font-size:80px;
-margin-top:-120px;
-animation:grow 3s ease forwards;
+margin-top:40px; /* más abajo */
+animation:grow 2.5s ease forwards;
 position:relative;
 }
 
@@ -50,27 +60,28 @@ position:relative;
 
 .tree-hearts{
 position:absolute;
-top:-40px;
+top:-90px; /* visibles arriba del árbol */
 left:50%;
 transform:translateX(-50%);
-font-size:28px;
+font-size:34px;
 }
 
 /* texto */
 #message{
-margin-top:100px;
+margin-top:140px; /* BAJADO */
 font-size:38px;
 font-family:'Playfair Display',serif;
+padding:0 20px;
 }
 
 #timer{
-margin-top:20px;
+margin-top:25px;
 font-size:24px;
 font-weight:600;
 }
 
 .subtext{
-margin-top:25px;
+margin-top:30px;
 font-size:18px;
 max-width:800px;
 margin-left:auto;
@@ -80,7 +91,7 @@ padding:0 20px;
 
 /* botones */
 .buttons{
-margin-top:60px;
+margin-top:70px;
 display:none;
 }
 
@@ -91,10 +102,23 @@ border:none;
 border-radius:14px;
 margin:10px;
 cursor:pointer;
+transition:0.3s;
 }
 
-#yesBtn{background:#00cc66;color:white;}
-#noBtn{background:#ff3333;color:white;position:relative;}
+#yesBtn{
+background:#00cc66;
+color:white;
+}
+
+#noBtn{
+background:#ff3333;
+color:white;
+position:relative;
+}
+
+button:hover{
+transform:scale(1.1);
+}
 
 /* galería */
 .gallery{
@@ -108,6 +132,7 @@ padding:60px 10%;
 background:rgba(255,255,255,0.1);
 padding:20px;
 border-radius:20px;
+backdrop-filter:blur(5px);
 }
 
 .card img{
@@ -190,6 +215,7 @@ document.getElementById("text2").style.display="none";
 function typeWriter(text){
 let i=0;
 let msg=document.getElementById("message");
+msg.innerHTML="";
 function typing(){
 if(i<text.length){
 msg.innerHTML+=text.charAt(i);
@@ -229,7 +255,7 @@ yesBtn.style.transform="scale("+yesSize+")";
 yesBtn.addEventListener("click",function(){
 document.body.innerHTML=`
 
-<h1 style="margin-top:80px;font-family:'Playfair Display',serif;font-size:50px;">
+<h1 style="margin-top:120px;font-family:'Playfair Display',serif;font-size:50px;text-align:center;">
 Jejeje espero te haya gustado muchísimo 💖
 </h1>
 
@@ -238,7 +264,7 @@ Jejeje espero te haya gustado muchísimo 💖
 <div class="card">
 <h2>Roblox 🎮❤️</h2>
 <img src="img/1.jpeg">
-<p>estos son algunas de tantas capturas que logre tomar mientras jugabamos roblox, que por cierto se que tendremos muchas mas! y sobre todo de terror, porque la verdad me encanta jugar mucho con vos aparte me llevo tremendos sustos JAJAJ, eres mas valiente que yo y siempre sigo tus instintos que siempre son acertados.</p>
+<p>estos son algunas de tantas capturas que logre tomar mientras jugabamos roblox...</p>
 </div>
 
 <div class="card">
@@ -250,13 +276,13 @@ Jejeje espero te haya gustado muchísimo 💖
 <div class="card">
 <h2>Nosotros bailando en Parkour roblox</h2>
 <img src="img/3.jpeg">
-<p>esta actividad que elegiste me encanto mucho sobre todo porque nos estuvimos riendo bien duro JAJAJ y la pasamos super chevere con los bailes!, nos veiamos bien divas los 2, amo, y mucha risa porque casi siempre te jalaba de la cuerda cuando nos caiamos, PD: Hay que intentarlo de nuevo jejej.</p>
+<p>esta actividad que elegiste me encanto mucho...</p>
 </div>
 
 <div class="card">
 <h2>Nosotros 💕</h2>
 <img src="img/4.jpeg">
-<p>esta foto ya no es sorpresa sin querer te arruine la sorpresa hace unos dias pero bueno, no me aguantaba en darte este regalo, quiero que sepas que te quiero muchisimo, lo sabes muy bien de mi parte, se que aveces soy terco, que no escucho aveces o que quizas me pongo muy irritable pero quiero que sepas que siempre siempre te tratare como una reina, como una persona que merece ser respetada, mi corazon es todo tuyo y espero pases un hermoso 14 de febrero 😘</p>
+<p>quiero que sepas que te quiero muchisimo...</p>
 </div>
 
 </div>
